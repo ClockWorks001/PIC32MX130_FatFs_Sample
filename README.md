@@ -38,7 +38,7 @@ Hiroshi Murakami
 [3]: http://www.microchip.com/pagehandler/en-us/family/mplabx/ "MPLAB X"
 [4]: http://www.microchip.com/mplab/mplab-code-configurator "MPLAB Code Configurator "
 [5]: http://www.microchip.com/pagehandler/en_us/devtools/mplabxc/ "MPLAB XC Compilers"
-[6]: http://kicad-pcb.org/i "KiCad"
+[6]: http://kicad-pcb.org/ "KiCad"
 [7]: http://www.microchip.com/Developmenttools/ProductDetails.aspx?PartNO=PG164130 "MPLAB PICkit3 In-Circuit Debugger"
 
 
