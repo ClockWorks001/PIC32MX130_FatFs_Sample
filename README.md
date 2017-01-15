@@ -12,6 +12,7 @@ References.
 ## Prerequisites
 
 I created this project using the free versions of the following tools:
+ * [FatFs][1] (R0.12b)
  * [Microchip MPLAB X][3] (v3.5)
  * [Microchip MPLAB X Code Configurator][4] (v3.26)
  * [Microchip XC32 Compiler][5] (v1.42)
@@ -31,7 +32,7 @@ Also, I use the [KiCad][6] to draw the electric circuit schematic.
 Hiroshi Murakami  
 <https://github.com/ClockWorks001>  
 
-[1]: http://elm-chan.org/fsw/ff/00index_e.html
+[1]: http://elm-chan.org/fsw/ff/00index_e.html "FatFs"
 [2]: http://ww1.microchip.com/downloads/en/DeviceDoc/60001168F.pdf "PIC32MXxxx"
 [3]: http://www.microchip.com/pagehandler/en-us/family/mplabx/ "MPLAB X"
 [4]: http://www.microchip.com/harmony "MPLAB Harmony Configurator"
