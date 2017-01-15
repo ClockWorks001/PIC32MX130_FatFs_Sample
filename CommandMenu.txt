@@ -1,0 +1,35 @@
+﻿/* Command Menu */
+	"+(DEL)->command clear\n"      //
+	"+(ESC)->exit or clear\n"		//
+	"+Dyymmdd->Date setting\n"		//
+	"+Thhmmss->Time setting\n"		//
+	"+G->Time Output\n"				//
+	"+fi [<mount>] - Force initialized the logical drive\n"	//
+	"+fs [<path>] - Show logical drive status\n"			//
+	"+fl [<path>] - Directory listing\n"					//
+	"+fo <mode> <file> - Open a file\n"						//
+	"+fc - Close a file\n"									//
+	"+fe <ofs> - Seek file pointer\n"						//
+	"+fr <len> - read file\n"								//
+	"+fd <len> - read and dump file from current fp\n"		//
+	"+fw <len> <val> - write file\n"						//
+	"+fn <old_name> <new_name> - Change file/dir name\n"	//
+	"+fu <path> - Unlink a file or dir\n"					//
+	"+fv - Truncate file\n"									//
+	"+fk <path> - Create a directory\n"						//
+	"+fx <src_name> <dst_name> - Copy file\n"				//
+	"+fg <path> - Change current directory\n"				//
+	"+dd [<pd#> <sector>] - Dump secrtor\n"					//
+	"+di <pd#> - Initialize physical drive\n"				//
+	"+ds <pd#> - Show disk status\n"						//
+
+	"+bd <ofs> - Dump R/W buffer\n"							//
+	"+br <pd#> <sector> <count> - Read disk into R/W buffer\n"	//
+	"+bw <pd#> <sector> <count> - Write R/W buffer into disk\n"	//
+	"+bf <n> - Fill working buffer\n"							//
+  
+
+/* Disk Status Bits (DSTATUS) */
+	#define STA_NOINIT		0x01	/* Drive not initialized */
+	#define STA_NODISK		0x02	/* No medium in the drive */
+	#define STA_PROTECT		0x04	/* Write protected */
