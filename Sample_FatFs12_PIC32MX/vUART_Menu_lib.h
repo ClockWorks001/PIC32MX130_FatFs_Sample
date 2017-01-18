@@ -9,7 +9,8 @@
 /*****************************
  * VARIABLES
  *****************************/
-enum eModeC2 {
+enum eModeC2
+{
 	eModeC2_menu_msg1,					//Start message
 	eModeC2_menu_init,
 	eModeC2_vGetsCMND,
@@ -21,12 +22,11 @@ enum eModeC2 {
 
 #if defined UART_MENU_LIB
 
-	enum eModeC2 eModeStatusC2;
-	unsigned char *ucPtr1, *ucPtr2;			// Pointer for Byte data
-	//long p1, p2;
+enum eModeC2 eModeStatusC2;
+unsigned char *ucPtr1, *ucPtr2;			// Pointer for Byte data
 
 #else
-	extern enum eModeC2 eModeStatusC2;
+extern enum eModeC2 eModeStatusC2;
 #endif
 
 
@@ -43,8 +43,6 @@ void vComandFormatCheck_7Digit(void);	//Comand format check 7digit
 void vShowNowTimeMessage(void);			//時間の表示
 
 void vCommand_FatFs(void);
-//void vCommand_FatFs_b(void);
-//void vCommand_FatFs_d(void);
 
 void vXputs_return(void);
 void put_rc (FRESULT rc);				//ステータスOUTPUT

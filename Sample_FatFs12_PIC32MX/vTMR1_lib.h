@@ -11,9 +11,9 @@
  *****************************/
 #if defined TMR1_LIB
 //    static volatile
-    volatile unsigned int uiTMR001, uiTMR002, uiTMR003 ;
+volatile unsigned int uiTMR001, uiTMR002, uiTMR003 ;
 #else
-    volatile extern unsigned int uiTMR001, uiTMR002, uiTMR003;
+volatile extern unsigned int uiTMR001, uiTMR002, uiTMR003;
 #endif
 
 /*****************************

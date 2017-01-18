@@ -6,22 +6,18 @@
  ******************************************************************************/
 #define UART_MENU_LIB
 
-//#include <plib.h>            /* Include to use PIC32 peripheral libraries      */
 #include "mcc_generated_files/mcc.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <stdio.h>
 #include "integer.h"
 #include "xprintf.h"
 
 #include "diskio.h"
 #include "ff.h"		//FatFs定義体取得の為
-//#include "vFF_lib.h"
 
 #include "vUART_CMND_lib.h"
 #include "vRTCC_lib.h"
-//#include "vTimer1_lib.h"
 #include "vUART_Menu_lib.h"
 
 
@@ -73,10 +69,9 @@ const BYTE bMsg01[] = {
 };
 
 
-//#pragma code
-/*****************************
- * initialization
- *****************************/
+//******************************************************************************
+//* initialization
+//******************************************************************************
 void vUART_menu_init(void) {
 	eModeStatusC2 = eModeC2_menu_init ;
 	vUART_CMND_Init();
@@ -86,9 +81,9 @@ void vUART_menu_init(void) {
 	xprintf(", Code page: %u\n", _CODE_PAGE);
 }
 
-/*****************************
- * Menu mode control
- *****************************/
+//******************************************************************************
+//* Menu mode control
+//******************************************************************************
 void vModeUartControl11(void) {
 
 	switch (eModeStatusC2) {
@@ -111,8 +106,10 @@ void vModeUartControl11(void) {
 			eModeStatusC2 = eModeC2_menu_msg1;
 			break;
 		case eUART_CMND_Del:
+		case eUART_CMND_Err:
 			eModeStatusC2 = eModeC2_menu_init;
 			break;
+		case eUART_CMND_Wait:
 		default:								//コマンド入力まち
 			break;
 		}
@@ -164,9 +161,7 @@ void vModeUartControl11(void) {
 
 	case  	eModeC2_Command_error:
 		// コマンド該当なし
-//		if(UARTTransmitterIsReady(UART2)) {
 			xputs("\n? Unrecognized command format\n");	// 入力エラー
-//		}
 		eModeStatusC2 = eModeC2_menu_init;
 		break;
 
@@ -177,9 +172,9 @@ void vModeUartControl11(void) {
 }
 
 
-/*****************************
- * Timer Setting
- *****************************/
+//******************************************************************************
+//* Timer Setting
+//******************************************************************************
 void vCommand_TimeSet(void) {
 	char str[3];
 	struct tm currentTime;
@@ -262,9 +257,9 @@ void vCommand_DateSet(void) {
 
 }
 
-/*****************************
- * Show Now Time Message
- *****************************/
+//******************************************************************************
+//* Show Now Time Message
+//******************************************************************************
 void vShowNowTimeMessage(void) {
 	struct tm currentTime;
     RTCC_TimeGet(&currentTime);         //現在の設定時刻を取得
@@ -272,9 +267,9 @@ void vShowNowTimeMessage(void) {
 	xprintf( "Date is %02d/%02d/%02d\n", currentTime.tm_year, currentTime.tm_mon, currentTime.tm_mday);
 }
 
-/*****************************
- * Comand format check 7digit
- *****************************/
+//******************************************************************************
+//* Comand format check 7digit
+//******************************************************************************
 void vComandFormatCheck_7Digit(void) {
 	char i;
 	for( i=1 ; i<7 ; i++) {
@@ -284,9 +279,9 @@ void vComandFormatCheck_7Digit(void) {
 	}
 }
 
-/*****************************
- * Timer Setting Error message
- *****************************/
+//******************************************************************************
+//* Timer Setting Error message
+//******************************************************************************
 void vModeC2_T_error(void) {
 
 }
@@ -325,9 +320,9 @@ FRESULT scan_files (
 }
 
 
-/*****************************
- * FatFs 
- *****************************/
+//******************************************************************************
+//* FatFs 
+//******************************************************************************
 void vCommand_FatFs(void) {
 	char *ptr, *ptr2;
 	long p1, p2, p3;
@@ -679,17 +674,17 @@ void vCommand_FatFs(void) {
 }
 
 
-/*****************************
- * 改行&入力指示プロンプト
- *****************************/
+//******************************************************************************
+//* 改行&入力指示プロンプト
+//******************************************************************************
 void vXputs_return(void) {
 	xputs(">");					//改行&入力指示プロンプト
 }
 
 
-/*****************************
- * pFatFs Moniter
- *****************************/
+//******************************************************************************
+//* pFatFs Moniter
+//******************************************************************************
 void put_rc (FRESULT rc) {		//ステータスOUTPUT
 	const char *str =
 		"OK\0" "DISK_ERR\0" "INT_ERR\0" "NOT_READY\0" "NO_FILE\0" "NO_PATH\0"

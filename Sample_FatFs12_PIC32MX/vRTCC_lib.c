@@ -6,9 +6,6 @@
  ******************************************************************************/
 #define RTCC_LIB
 
-//#include <plib.h>            /* Include to use PIC32 peripheral libraries      */
-//#include <sys/attribs.h>     /* For __ISR definition                          */
-//#include <xc.h>            /* Include to use PIC32 peripheral libraries      */
 #include "mcc_generated_files/mcc.h"
 #include "vRTCC_lib.h"
 
@@ -17,7 +14,6 @@
  *****************************/
 
 
-//******************************************************************************
 //******************************************************************************
 /*---------------------------------------------------------*/
 /* User Provided RTC Function for FatFs module             */
@@ -29,15 +25,15 @@
 DWORD get_fattime (void)
 {
 	struct tm currentTime;
-    DWORD tmr;
-    
-    RTCC_TimeGet(&currentTime);
+	DWORD tmr;
+
+	RTCC_TimeGet(&currentTime);
 	tmr =	 (((DWORD)currentTime.tm_year + 2000 - 1980) << 25)
-			| ((DWORD)currentTime.tm_mon << 21)
-			| ((DWORD)currentTime.tm_mday << 16)
-			| (WORD)(currentTime.tm_hour << 11)
-			| (WORD)(currentTime.tm_min << 5)
-			| (WORD)(currentTime.tm_sec >> 1);
+			 | ((DWORD)currentTime.tm_mon << 21)
+			 | ((DWORD)currentTime.tm_mday << 16)
+			 | (WORD)(currentTime.tm_hour << 11)
+			 | (WORD)(currentTime.tm_min << 5)
+			 | (WORD)(currentTime.tm_sec >> 1);
 
 	return tmr;
 }

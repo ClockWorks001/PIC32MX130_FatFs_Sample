@@ -47,13 +47,9 @@
 #include "./integer.h"
 #include "./xprintf.h"
 #include "./vTMR1_lib.h"
-//#include "./vFIFO.h"
 #include "./vUART_CMND_lib.h"
 
 #define LED1_Toggle() IO_RB6_Toggle() 
-
-//FIFO_STRUCT vFifo;
-//BYTE buff[10];
 
 /*
                          Main application
@@ -63,10 +59,8 @@ int main(void)
     // initialize the device
     SYSTEM_Initialize();
     uiTMR001 = 0;
-//    vFifo_init (&vFifo, sizeof(buff), &buff[0]);
     vUART_CMND_Init();
     vUART_menu_init();
-//    SD_POWER_EN();
     
     while (1)
     {
@@ -76,18 +70,6 @@ int main(void)
             LED1_Toggle(); 
         }
         
-/*        
-        if(UART2_DataReady){
-            vFifo_putc (&vFifo, UART2_Read());
-            
-            if(vFifo_test(&vFifo) >= sizeof(buff)){
-                while( vFifo_test(&vFifo)){
-                    UART2_Write(vFifo_getc(&vFifo));
-                }
-            }
-            
-        }
-*/       
         vUART_TxPutc();
         vModeUartControl11();
         

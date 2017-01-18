@@ -11,15 +11,14 @@
  *****************************/
 #if defined RTCC_LIB
 
-	char cFlag1Minute;
+char cFlag1Minute;
 #else
 
-	extern char cFlag1Minute;
+extern char cFlag1Minute;
 #endif
 
 /*****************************
  * PROTOTYPES
  *****************************/
-
 DWORD get_fattime (void);						//FatFs書き込み時の現在時間取得用
 

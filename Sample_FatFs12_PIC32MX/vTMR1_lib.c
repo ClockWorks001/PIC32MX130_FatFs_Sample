@@ -19,9 +19,9 @@
 //******************************************************************************
 void Intrupt_TMR1(void)
 {
-	if (uiTMR001 > 0) --uiTMR001; // 1000Hz decrement timer with zero stopped 
-	if (uiTMR002 > 0) --uiTMR002; // 1000Hz decrement timer with zero stopped 
-	if (uiTMR003 > 0) --uiTMR003; // 1000Hz decrement timer with zero stopped 
+	if (uiTMR001 > 0) --uiTMR001; // 1000Hz decrement timer with zero stopped
+	if (uiTMR002 > 0) --uiTMR002; // 1000Hz decrement timer with zero stopped
+	if (uiTMR003 > 0) --uiTMR003; // 1000Hz decrement timer with zero stopped
 }
 
 
