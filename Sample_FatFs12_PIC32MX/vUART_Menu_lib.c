@@ -38,13 +38,16 @@ const BYTE bMsg01[] = {
 	"+Thhmmss->Time setting\n"		//
 	"+G->Time Output\n"				//時間の表示
 	"+fi [<mount>] - Force initialized the logical drive\n"	//
+#if !_FS_READONLY 
 	"+fs [<path>] - Show logical drive status\n"			//
+#endif
 	"+fl [<path>] - Directory listing\n"					//
 	"+fo <mode> <file> - Open a file\n"						//
 	"+fc - Close a file\n"									//
 	"+fe <ofs> - Seek file pointer\n"						//
 	"+fr <len> - read file\n"								//
 	"+fd <len> - read and dump file from current fp\n"		//
+#if !_FS_READONLY 
 	"+fw <len> <val> - write file\n"						//
 	"+fn <old_name> <new_name> - Change file/dir name\n"	//
 	"+fu <path> - Unlink a file or dir\n"					//
@@ -53,6 +56,7 @@ const BYTE bMsg01[] = {
 //	"+fa <atrr> <mask> <name> - Change file/dir attribute\n"//
 //	"+ft <year> <month> <day> <hour> <min> <sec> <name> - Change timestamp\n"		//
 	"+fx <src_name> <dst_name> - Copy file\n"				//
+#endif
 	"+fg <path> - Change current directory\n"				//
 //	"+fq - Show current dir path\n"							//
 //	"+fm <partition rule> <sect/clust> - Create file system\n" //
@@ -434,6 +438,7 @@ void vCommand_FatFs(void) {
 				put_rc(f_mount(&FatFs, "", (BYTE)p2));
 				break;
 
+#if !_FS_READONLY
 			case 's' :	/* fs [<path>] - Show logical drive status */
 				while (*ptr == ' ') ptr++;
 				res = f_getfree(ptr, (DWORD*)&p2, &fs);
@@ -454,7 +459,7 @@ void vCommand_FatFs(void) {
 						(fs->n_fatent - 2) * (fs->csize / 2), p2 * (fs->csize / 2)
 				);
 				break;
-
+#endif
 			case 'l' :	/* fl [<path>] - Directory listing */
 				while (*ptr == ' ') ptr++;
 				res = f_opendir(&dir, ptr);
@@ -478,8 +483,12 @@ void vCommand_FatFs(void) {
 							(Finfo.ftime >> 11), (Finfo.ftime >> 5) & 63, Finfo.fsize, Finfo.fname);
 				}
 				xprintf("%4u File(s),%10lu bytes total\n%4u Dir(s)", s1, p1, s2);
+#if _FS_READONLY
+				xprintf("\n");
+#else
 				if (f_getfree(ptr, (DWORD*)&p1, &fs) == FR_OK)
 					xprintf(", %10lu bytes free\n", p1 * fs->csize * 512);
+#endif
 				break;
 #if _USE_FIND
 			case 'L' :	/* fL <path> <pattern> - Directory search */
@@ -551,6 +560,7 @@ void vCommand_FatFs(void) {
 				}
 				break;
 
+#if !_FS_READONLY 
 			case 'w' :	/* fw <len> <val> - write file */
 				if (!xatoi(&ptr, &p1) || !xatoi(&ptr, &p2)) break;
 				memset(Buff, (int)p2, sizeof Buff);
@@ -592,6 +602,7 @@ void vCommand_FatFs(void) {
 				while (*ptr == ' ') ptr++;
 				put_rc(f_mkdir(ptr));
 				break;
+#endif
 #if _USE_CHMOD && !_FS_READONLY
 			case 'a' :	/* fa <atrr> <mask> <name> - Change file/dir attribute */
 				if (!xatoi(&ptr, &p1) || !xatoi(&ptr, &p2)) break;
@@ -608,6 +619,7 @@ void vCommand_FatFs(void) {
 				break;
 #endif
 
+#if !_FS_READONLY
 			case 'x' : /* fx <src_name> <dst_name> - Copy file */
 				while (*ptr == ' ') ptr++;
 				ptr2 = strchr(ptr, ' ');
@@ -642,6 +654,7 @@ void vCommand_FatFs(void) {
 				f_close(&File[0]);
 				f_close(&File[1]);
 				break;
+#endif
 #if _FS_RPATH >= 1
 			case 'g' :	/* fg <path> - Change current directory */
 				while (*ptr == ' ') ptr++;
