@@ -33,3 +33,18 @@
 	#define STA_NOINIT		0x01	/* Drive not initialized */
 	#define STA_NODISK		0x02	/* No medium in the drive */
 	#define STA_PROTECT		0x04	/* Write protected */
+
+fo mode ("fo 1 xxxx.txt" => FA_READ)
+/* File access mode and open method flags (3rd argument of f_open) */
+#define	FA_READ				0x01
+#define	FA_WRITE			0x02
+#define	FA_OPEN_EXISTING	0x00
+#define	FA_CREATE_NEW		0x04
+#define	FA_CREATE_ALWAYS	0x08
+#define	FA_OPEN_ALWAYS		0x10
+#define	FA_OPEN_APPEND		0x30
+
+*file read の手順 100byteのダンプをコンソール出力
+fi
+fo 1 Chime.txt
+fd 100

@@ -123,7 +123,8 @@ void vPutc_to_TxFifo(BYTE d)
 // Put a byte from TxFifo to UART
 void vUART_TxPutc(void)
 {
-	while(!(UART2_StatusGet() & UART2_TX_FULL) && vFifo_test(&TxFifo))
+//	while(!(UART2_StatusGet() & UART2_TX_FULL) && vFifo_test(&TxFifo))
+	while(!(UART2_StatusGet() & UART2_TX_FULL) && vFifo_remains(&TxFifo))
 		{
 			UART2_Write(vFifo_getc(&TxFifo));
 		}

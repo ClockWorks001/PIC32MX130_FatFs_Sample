@@ -11,14 +11,17 @@
 
 
 //******************************************************************************
-// Check number of bytes in the FIFO
+// return remaining bytes of data existing of FIFO.
+// if zero there are no data.
 //******************************************************************************
+/*
 int  vFifo_test (
 	FIFO_STRUCT* Fifo
 )
 {
 	return Fifo->ct;   // Return number of bytes in the FIFO
 }
+*/
 
 //******************************************************************************
 // return space size of bytes in the FIFO
